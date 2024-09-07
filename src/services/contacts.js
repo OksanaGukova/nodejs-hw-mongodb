@@ -1,8 +1,22 @@
 import { contactsCollection } from "../bd/models/contact.js";
+import { calculatePaginationData } from "../utils/calculatePaginationData.js";
 
-export const getAllContacts = async () => {
-    const contacts = await contactsCollection.find();
-    return contacts;
+export const getAllContacts = async ({ page, perPage }) => {
+  const limit = perPage;
+  const skip = (page - 1) * perPage;
+
+  // Виконуємо запит з пагінацією
+  const contactsQuery = contactsCollection.find();
+  const contactCount = await contactsCollection.countDocuments(); // Отримуємо загальну кількість документів
+  const contacts = await contactsQuery.skip(skip).limit(limit).exec(); // Отримуємо документи з пагінацією
+
+  // Розраховуємо дані для пагінації
+  const paginationData = calculatePaginationData(contactCount, perPage, page);
+
+  return {
+    data: contacts,
+    ...paginationData,
+  };
 };
 
 export const getContactById = async (contactId) => {
