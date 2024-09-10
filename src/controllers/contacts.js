@@ -1,32 +1,21 @@
 import createHttpError from "http-errors";
 import { createContact, deleteContact, getAllContacts, getContactById, updateContact } from "../services/contacts.js";
 import { parsePaginationParams } from "../utils/parsePaginationParams.js";
+import { parseSortParams } from "../utils/parseSortParams.js";
+
 
 export const getContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
+ const { sortBy, sortOrder } = parseSortParams(req.query);
 
-  // Отримуємо контакти та дані пагінації
-  const {
-    data: contacts,
-    totalItems,
-    totalPages,
-    hasPreviousPage,
-    hasNextPage,
-  } = await getAllContacts({ page, perPage });
+  const contacts = await getAllContacts({
+    page, perPage, sortBy, sortOrder
+  })
 
-  // Відправляємо відповідь
   res.status(200).json({
     status: 200,
     message: 'Successfully found contacts!',
-    data: {
-      data: contacts,
-      page,
-      perPage,
-      totalItems,
-      totalPages,
-      hasPreviousPage,
-      hasNextPage,
-    },
+    data: contacts
   });
 };
 
