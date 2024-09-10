@@ -1,16 +1,18 @@
 import { contactsCollection } from "../bd/models/contact.js";
+import { SORT_ORDER } from "../constans/index.js";
 import { calculatePaginationData } from "../utils/calculatePaginationData.js";
 
-export const getAllContacts = async ({ page, perPage }) => {
+export const getAllContacts = async ({ page = 1, perPage = 10, SortOrder = SORT_ORDER.ASC, sortBy = '-id' }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
-  // Виконуємо запит з пагінацією
   const contactsQuery = contactsCollection.find();
-  const contactCount = await contactsCollection.countDocuments(); // Отримуємо загальну кількість документів
-  const contacts = await contactsQuery.skip(skip).limit(limit).exec(); // Отримуємо документи з пагінацією
+  const contactCount = await contactsCollection
+    .find()
+    .merge(contactsQuery)
+    .countDocuments();
+  const contacts = await contactsQuery.skip(skip).limit(limit).sort({[sortBy]: SortOrder}).exec();
 
-  // Розраховуємо дані для пагінації
   const paginationData = calculatePaginationData(contactCount, perPage, page);
 
   return {
