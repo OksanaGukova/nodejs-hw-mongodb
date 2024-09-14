@@ -24,11 +24,17 @@ router.get('/contacts', ctrlWrapper(getContactsController));
 
 
 router.get(
-  '/contacts/:contactId',
+  '/:contactId',
   isValidId,
   ctrlWrapper(getContactByIdController),
 );
 
+
+router.post(
+  './register',
+  validateBody(createContactSchema),
+  ctrlWrapper(createContactController),
+)
 
 router.post(
   '/contacts',
@@ -38,7 +44,7 @@ router.post(
 
 
 router.put(
-  '/contacts/:contactId',
+  '/:contactId',
   isValidId,
   validateBody(updateContactSchema),
   ctrlWrapper(upsertContactController),
@@ -46,7 +52,7 @@ router.put(
 
 
 router.patch(
-  '/contacts/:contactId',
+  '/:contactId',
   isValidId,
   validateBody(updateContactSchema),
   ctrlWrapper(patchContactController),
@@ -54,7 +60,7 @@ router.patch(
 
 
 router.delete(
-  '/contacts/:contactId',
+  '/:contactId',
   isValidId,
   ctrlWrapper(deleteContactController),
 );
