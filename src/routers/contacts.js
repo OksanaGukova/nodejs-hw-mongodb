@@ -20,7 +20,7 @@ import { validateBody } from '../midlewares/validateBody.js';
 const router = Router();
 
 
-router.get('/contacts', ctrlWrapper(getContactsController));
+router.get('/', ctrlWrapper(getContactsController));
 
 
 router.get(
@@ -31,15 +31,15 @@ router.get(
 
 
 router.post(
-  './register',
+  '/register',
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
-)
+);
 
-router.post(
-  '/contacts',
-  validateBody(createContactSchema),
-  ctrlWrapper(createContactController),
+router.delete(
+  '/:contactId',
+  isValidId,
+  ctrlWrapper(deleteContactController),
 );
 
 
@@ -59,10 +59,6 @@ router.patch(
 );
 
 
-router.delete(
-  '/:contactId',
-  isValidId,
-  ctrlWrapper(deleteContactController),
-);
+
 
 export default router;
