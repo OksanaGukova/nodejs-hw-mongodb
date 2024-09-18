@@ -35,6 +35,7 @@ export const getContactByIdController = async (req, res) => {
     message: 'Successfully found contact with id {contactId}!',
     data: contact,
   });
+  
 };
 
 export const createContactController = async (req, res) => {
