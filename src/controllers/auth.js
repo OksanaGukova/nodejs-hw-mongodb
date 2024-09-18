@@ -30,8 +30,6 @@ res.json({
 });
 };
 
-
-
 const setupSession = (res, session) => {
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
@@ -42,7 +40,6 @@ res.cookie('sessionId', session._id, {
   expires: new Date(Date.now() + THIRTY_DAYS)
 });
 };
-
 
 export const refreshUserSessionController = async (req, res) => {
   const session = await refreshUsersSession({

@@ -15,10 +15,12 @@ import {
 } from '../validation/contacts.js';
 import { isValidId } from '../midlewares/isValidId.js';
 import { validateBody } from '../midlewares/validateBody.js';
+import { authenticate } from '../midlewares/authenticate.js';
 
 
 const router = Router();
 
+router.use(authenticate);
 
 router.get('/', ctrlWrapper(getContactsController));
 
@@ -32,6 +34,12 @@ router.get(
 
 router.post(
   '/register',
+  validateBody(createContactSchema),
+  ctrlWrapper(createContactController),
+);
+
+router.post(
+  '/',
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );

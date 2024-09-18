@@ -39,9 +39,6 @@ return await SessionsCollection.create({
 });
 };
 
-
-
-
 const createSession = () => {
     const accessToken = randomBytes(30).toString('base64');
     const refreshToken = randomBytes(30).toString('base64');

@@ -12,6 +12,7 @@ export const createContactSchema = Joi.object({
     .min(3)
     .max(20)
     .required(),
+    userId: Joi.string().required(),
 });
 
 
@@ -26,4 +27,5 @@ export const updateContactSchema = Joi.object({
     .min(3)
     .max(20),
   timestamps: Joi.boolean(),
+  userId: Joi.string(),
 });
