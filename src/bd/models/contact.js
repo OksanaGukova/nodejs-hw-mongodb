@@ -25,18 +25,19 @@ const contactsSchema = new Schema(
       required: true,
       default: 'personal',
     },
- userId: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-    required: true,
+
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+      required: true,
     },
     photo: {
-   type: String,
- }
+      type: String,
+    },
   },
   {
     timestamps: true,
-    versionKey: false
+    versionKey: false,
   },
 );
 
