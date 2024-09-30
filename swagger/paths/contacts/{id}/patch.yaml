@@ -1,0 +1,57 @@
+tags:
+  - Contacts
+summary: Upsert contact by id
+operationId: upsertContact
+description: 'Upsert contact by id. If contact exists, it will be updated, otherwise, a new contact will be created.'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+responses:
+  '200':
+    description: 'Update existing contact by id'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Successfully updated a contact!'
+            data:
+              type: object
+              $ref: '../../../components/schemas/contact.yaml'
+  '201':
+    description: 'Created a new contact'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: 'Successfully created a new contact!'
+            data:
+              type: object
+              $ref: '../../../components/schemas/contact.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'

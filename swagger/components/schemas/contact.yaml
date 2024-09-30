@@ -32,7 +32,7 @@ properties:
   userId:
     description: The unique identifier of the user who created the contact.
     type: string
-    example: "60d5f2b5e5f1a534d08f7bd2"
+    format: binary
   photo:
     description: "Link to contact's photo"
     type: string
