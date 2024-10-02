@@ -7,4 +7,5 @@ security:
   - bearerAuth: []
 responses:
   '204':
+     description: Contact deleted successfully
 
