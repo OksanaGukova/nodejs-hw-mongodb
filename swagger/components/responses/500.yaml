@@ -1,20 +1,19 @@
-description: Not Found error
+description: Internal Server Error
 content:
   application/json:
     schema:
       type: object
       required:
-        - name
-        - phoneNumber
-        - contactType
-        - userId
+        - status
+        - message
+        - data
       properties:
         status:
           type: integer
-          example: 404
+          example: 500
         message:
           type: string
-          example: Resource not found
+          example: InternalServerError
         data:
           type: object
           required:
@@ -22,4 +21,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Resource not found'
+              example: 'Something went wrong'

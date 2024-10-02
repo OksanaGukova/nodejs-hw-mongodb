@@ -1,0 +1,10 @@
+tags:
+  - Users
+summary: Logout a user
+operationId: logoutUser
+description: 'logoutUser'
+security:
+  - bearerAuth: []
+responses:
+  '204':
+
