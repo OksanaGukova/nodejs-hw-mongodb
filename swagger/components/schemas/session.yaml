@@ -1,0 +1,42 @@
+tags:
+  - Session
+summary: Create a session for the user (Login)
+operationId: createSession
+description: 'Create a session by logging in the user. This will return the access and refresh tokens, and the session ID.'
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+           - userId
+           - accessToken
+           - refreshToken
+           - sessionId
+           - accessTokenValidUntil
+           - refreshTokenValidUntil
+         properties:
+            accessToken:
+              type: string
+              description: JWT access token for authenticated requests
+              example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
+            refreshToken:
+              type: string
+              description: JWT refresh token used to refresh the session
+              example: 'dGhpcyByZWZyZXNoIHRva2VuIGlzIGV4YW1wbGU'
+            sessionId:
+              type: string
+              description: ID of the session created for the user
+              example: '60d5f2b5e5f1a534d08f7bd2'
+            accessTokenValidUntil:
+              type: string
+              format: date-time
+              description: Date when the access token expires
+              example: '2024-10-01T12:00:00Z'
+            refreshTokenValidUntil:
+              type: string
+              format: date-time
+              description: Date when the refresh token expires
+              example: '2024-11-01T12:00:00Z'
+

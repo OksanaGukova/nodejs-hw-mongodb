@@ -5,8 +5,6 @@ operationId: registerUser
 description: 'Register a user'
 security:
   - bearerAuth: []
-requestBody:
-
 responses:
   '201':
     description: Creates a contact
