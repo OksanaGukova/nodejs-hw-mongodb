@@ -8,4 +8,5 @@ security:
 responses:
   '204':
      description: Contact deleted successfully
-
+  '401':
+     $ref: '../../components/responses/401.yaml'
